@@ -1,0 +1,30 @@
+<h1>Корзина</h1>
+
+{{#if basket.length}}
+    <div class="basket">
+        <table class="table-basket">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Количество</th>
+                    <th>Цена за курс</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each basket}}
+                    <tr>
+                        <th>{{courseID.title}}</th>
+                        <th>{{count}}</th>
+                        <th><span class="price small">{{courseID.price}}</span></th>
+                        <th><button class="btn btn-small js-remove" data-id="{{courseID._id}}">Удалить</button></th>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <h4 class="basket-price">Итого: <span class="price">{{totalPrice}}</span></h4>
+    </div>
+
+{{else}}
+    <p>Корзина пуста</p>
+{{/if}}
