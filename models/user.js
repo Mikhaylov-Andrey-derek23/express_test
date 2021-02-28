@@ -44,4 +44,18 @@ users.methods.addToBasket = function(course){
     return this.save();
 }
 
+users.methods.removeBasketCourse = function(id){
+    let items = [...this.basket.items];
+    const idx = items.findIndex(e => e.courseID.toString() == id.toString());
+    if(items[idx].count > 1){
+        items[idx].count --;
+    }else{
+        items = items.filter(e => e.courseID.toString() !== id.toString())
+    }
+    this.basket = {items}
+    return this.save();
+}
+
+
+
 module.exports = model('User', users)

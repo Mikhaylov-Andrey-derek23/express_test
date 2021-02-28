@@ -28,7 +28,9 @@ router.post('/add', async(req, res)=>{
 })
 
 router.delete('/remove/:id', async(req, res)=>{
-    const basket = await Basket.remove(req.params.id);
+    req.user.removeBasketCourse(req.params.id); 
+    const user = await req.user.populate('basket.items.courseID').execPopulate();
+    const basket = {course : user.basket.items, price : getAllPrice(user.basket.items)}
     res.status(200).json(basket);
     res.end;
     

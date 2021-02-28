@@ -22,10 +22,10 @@ if(tableBasket){
                     let tr = '';
                     basket.course.map(e => {
                         tr =  tr + `<tr>
-                            <th>${e.title}</th>
+                            <th>${e.courseID.title}</th>
                             <th>${e.count}</th>
-                            <th><span class="price small">${currentPrice(e.price)}</span></th>
-                            <th><button class="btn btn-small js-remove" data-id="${e.uuid}">Удалить</button></th>
+                            <th><span class="price small">${currentPrice(e.courseID.price)}</span></th>
+                            <th><button class="btn btn-small js-remove" data-id="${e.courseID._id}">Удалить</button></th>
                         </tr>`;
                     })
                     tableBasket.querySelector('tbody').innerHTML = tr; 
