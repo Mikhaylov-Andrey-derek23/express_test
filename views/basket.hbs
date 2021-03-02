@@ -23,6 +23,9 @@
             </tbody>
         </table>
         <h4 class="basket-price">Итого: <span class="price">{{totalPrice}}</span></h4>
+        <form action="/orders" method="POST">
+            <button type="submit" class="btn">Сделать заказ</button>
+        </form>
     </div>
 
 {{else}}

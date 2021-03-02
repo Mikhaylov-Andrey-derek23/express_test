@@ -10,6 +10,7 @@ const homeRouter = require('./routers/home');
 const coursesRouter = require('./routers/courses');
 const addRouter = require('./routers/add');
 const basketRouter = require('./routers/basket');
+const ordersRouter = require('./routers/orders');
 
 
 
@@ -45,6 +46,7 @@ app.use('/', homeRouter);
 app.use('/courses', coursesRouter);
 app.use('/add', addRouter);
 app.use('/basket', basketRouter);
+app.use('/orders', ordersRouter);
 
 
 const PORT = process.env.PORT || 3000;

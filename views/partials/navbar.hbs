@@ -24,6 +24,11 @@
         {{else}}
           <li><a href="/basket">Корзина</a>
         {{/if}}
+        {{#if isOrders}}
+          <li class="active"><a href="/orders">Заказы</a></li>
+        {{else}}
+          <li><a href="/orders">Заказы</a>
+        {{/if}}
       </ul>
       </ul>
     </div>

@@ -56,6 +56,11 @@ users.methods.removeBasketCourse = function(id){
     return this.save();
 }
 
+users.methods.clearBasket = function(){
+    this.basket = {items : []};
+    return this.save();
+} 
+
 
 
 module.exports = model('User', users)
