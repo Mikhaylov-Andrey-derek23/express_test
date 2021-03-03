@@ -11,6 +11,7 @@ const coursesRouter = require('./routers/courses');
 const addRouter = require('./routers/add');
 const basketRouter = require('./routers/basket');
 const ordersRouter = require('./routers/orders');
+const aouthRouter = require('./routers/aouth');
 
 
 
@@ -47,6 +48,7 @@ app.use('/courses', coursesRouter);
 app.use('/add', addRouter);
 app.use('/basket', basketRouter);
 app.use('/orders', ordersRouter);
+app.use('/aouth', aouthRouter);
 
 
 const PORT = process.env.PORT || 3000;

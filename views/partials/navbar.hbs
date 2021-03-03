@@ -29,6 +29,11 @@
         {{else}}
           <li><a href="/orders">Заказы</a>
         {{/if}}
+        {{#if isLogin}}
+          <li class="active"><a href="/aouth#login">Авторизация</a></li>
+        {{else}}
+          <li><a href="/aouth#login">Авторизация</a>
+        {{/if}}
       </ul>
       </ul>
     </div>
