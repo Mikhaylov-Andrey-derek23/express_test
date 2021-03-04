@@ -6,7 +6,6 @@ const router = Router();
 router.get('/', async(req, res)=>{
     try{
         const orders = await Order.find({'user.userId' : req.user._id}).populate('user.userId');
-        console.log(orders)
         res.render('orders', {
             isOrders : true,
             title: 'Заказы',
