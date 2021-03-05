@@ -15,6 +15,7 @@ const basketRouter = require('./routers/basket');
 const ordersRouter = require('./routers/orders');
 const aouthRouter = require('./routers/aouth');
 const varbalse = require('./midleware/varibalse');
+const userMidleware = require('./midleware/user');
 
 
 const MONGOBD_URL = 'mongodb+srv://derek:1234@cluster0.6ccds.mongodb.net/shop';
@@ -57,6 +58,7 @@ app.use(session({
     store
 }))
 app.use(varbalse);
+app.use(userMidleware);
 
 app.use('/', homeRouter);
 app.use('/courses', coursesRouter);
