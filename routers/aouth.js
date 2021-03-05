@@ -1,4 +1,5 @@
 const {Router} = require('express');
+const User = require('../models/user');
 
 const router = Router();
 
@@ -10,12 +11,21 @@ router.get('/', async(req, res)=>{
 })
 
 router.post('/login', async(req, res)=>{
+    const user = await User.findById('6032aeba20bf681870e32e44');
+    req.session.user = user;
+    
     req.session.isAutheticated = true;
-    res.redirect('/');
+    req.session.save(err=>{
+        if(err){
+            throw err;
+        }
+        res.redirect('/');
+    })
+
 })
 router.get('/logout', async(req, res)=>{
     req.session.destroy(()=>{
-        res.redirect('/')
+        res.redirect('/');
     });
     
 })
