@@ -6,7 +6,9 @@ const router = Router();
 router.get('/', async(req, res)=>{
     res.render('login/aouth', {
         title : 'Авторизация',
-        isLogin : true
+        isLogin : true,
+        errorLogin : req.flash('errorLogin'),
+        errorRegister : req.flash('errorRegister')
     })
 })
 
@@ -15,8 +17,7 @@ router.post('/login', async(req, res)=>{
         const {email, password} = req.body;
         const user = await User.findOne({email})
         if(user){
-            //const areSame = await bcrypt.compare(password, user.password);
-            const areSame = true
+            const areSame = await bcrypt.compare(password, user.password);
             if(areSame){
                 req.session.user = user;
                 req.session.isAutheticated = true;
@@ -28,10 +29,12 @@ router.post('/login', async(req, res)=>{
                 })
 
             }else{
+                req.flash('errorLogin', 'Пароль не верный');
                 res.redirect('/aouth#login') 
             }
             
         }else{
+            req.flash('errorLogin', 'Такого email нет');
             res.redirect('/aouth#login')
         }
         
@@ -63,17 +66,24 @@ router.post('/register', async(req, res)=>{
         const {email, name, password, confirm} = req.body;
         const candidate = await User.findOne({email});
         if(candidate){
-            res.redirect('/aouth#register')
+            req.flash('errorRegister', 'Такой email уже есть');
+            res.redirect('/aouth#register');
         }
-        haspassword = await bcrypt.hash(password, 10);
-        const user = new User({
-            email,
-            name,
-            password: haspassword,
-            basket : {items : []}
-        })
-        user.save();
-        res.redirect('/aouth#login');
+        else if(password != confirm){
+            req.flash('errorRegister', 'Пароль не совпадает');
+            res.redirect('/aouth#register');
+        }else{
+            haspassword = await bcrypt.hash(password, 10);
+            const user = new User({
+                email,
+                name,
+                password: haspassword,
+                basket : {items : []}
+            })
+            user.save();
+            res.redirect('/aouth#login');
+        }
+
         
     }catch(e){
         console.log(e)
