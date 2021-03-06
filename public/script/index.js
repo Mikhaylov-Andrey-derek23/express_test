@@ -31,7 +31,8 @@ if(tableBasket){
     tableBasket.addEventListener('click', (event)=>{
         if(event.target.classList.contains('js-remove')){
             const id = event.target.dataset.id;
-            fetch('/basket/remove/'+id, {method : 'delete'})
+            const csrf = event.target.dataset.csrf;
+            fetch('/basket/remove/'+id, {method : 'delete', headers : {'X-XSRF-TOKEN' : csrf}})
             .then(res => res.json())
             .then(basket => {
                 if(basket.course.length){
@@ -41,7 +42,7 @@ if(tableBasket){
                             <th>${e.courseID.title}</th>
                             <th>${e.count}</th>
                             <th><span class="price small">${currentPrice(e.courseID.price)}</span></th>
-                            <th><button class="btn btn-small js-remove" data-id="${e.courseID._id}">Удалить</button></th>
+                            <th><button class="btn btn-small js-remove" data-id="${e.courseID._id}" data-csrf="${csrf}">Удалить</button></th>
                         </tr>`;
                     })
                     tableBasket.querySelector('tbody').innerHTML = tr; 

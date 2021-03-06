@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const csrf = require('csurf');
 const Handlebars = require('handlebars')
 const expressHandlebars  = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
@@ -7,7 +8,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 
-const User = require('./models/user');
+
 const homeRouter = require('./routers/home');
 const coursesRouter = require('./routers/courses');
 const addRouter = require('./routers/add');
@@ -57,6 +58,7 @@ app.use(session({
     saveUninitialized : false,
     store
 }))
+app.use(csrf());
 app.use(varbalse);
 app.use(userMidleware);
 
