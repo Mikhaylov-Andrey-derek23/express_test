@@ -67,7 +67,6 @@ app.use('/basket', basketRouter);
 app.use('/orders', ordersRouter);
 app.use('/aouth', aouthRouter);
 
-
 const PORT = process.env.PORT || 3000;
 
 async function start(){

@@ -5,10 +5,19 @@ const users = new Schema({
         type: String,
         require : true
     },
-    name : {
-        type : String,
+    name : String,
+    password : {
+        type: String,
         require : true
+    },
+    typeUser : {
+        type : String,
+        default : 'user'
     }, 
+    dateRegister : {
+        type : Date,
+        default : Date.now
+    },
     basket : {
         items : [
             {
