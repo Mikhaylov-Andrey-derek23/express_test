@@ -1,6 +1,6 @@
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Приложение курсов</a>
+      <a href="/" class="brand-logo">Магазин курсов</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         {{#if isHome}}
           <li class="active"><a href="/">Главная</a></li>
@@ -14,21 +14,36 @@
           <li><a href="/courses">Курсы</a></li>
         {{/if}}
 
-        {{#if isAdd}}
-          <li class="active"><a href="/add">Добавить курс</a></li>
+        {{#if isAuth}}
+          {{#if isUserAdmin}}
+            {{#if isAdd}}
+              <li class="active"><a href="/add">Добавить курс</a></li>
+            {{else}}
+              <li><a href="/add">Добавить курс</a>
+            {{/if}}
+          {{/if}}
+
+          {{#if isBasket}}
+            <li class="active"><a href="/basket">Корзина</a></li>
+          {{else}}
+            <li><a href="/basket">Корзина</a>
+          {{/if}}
+          {{#if isOrders}}
+            <li class="active"><a href="/orders">Заказы</a></li>
+          {{else}}
+            <li><a href="/orders">Заказы</a>
+          {{/if}}
+          <li><a href="/aouth/logout">Выйти</a>
         {{else}}
-          <li><a href="/add">Добавить курс</a>
+          {{#if isLogin}}
+            <li class="active"><a href="/aouth#login">Войти</a></li>
+          {{else}}
+            <li><a href="/aouth#login">Войти</a>
+          {{/if}}
         {{/if}}
-        {{#if isBasket}}
-          <li class="active"><a href="/basket">Корзина</a></li>
-        {{else}}
-          <li><a href="/basket">Корзина</a>
-        {{/if}}
-        {{#if isOrders}}
-          <li class="active"><a href="/orders">Заказы</a></li>
-        {{else}}
-          <li><a href="/orders">Заказы</a>
-        {{/if}}
+
+        
+
       </ul>
       </ul>
     </div>

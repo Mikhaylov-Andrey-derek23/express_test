@@ -17,13 +17,14 @@
                         <th>{{courseID.title}}</th>
                         <th>{{count}}</th>
                         <th><span class="price small">{{courseID.price}}</span></th>
-                        <th><button class="btn btn-small js-remove" data-id="{{courseID._id}}">Удалить</button></th>
+                        <th><button class="btn btn-small js-remove" data-id="{{courseID._id}}" data-csrf="{{@root.csrf}}">Удалить</button></th>
                     </tr>
                 {{/each}}
             </tbody>
         </table>
         <h4 class="basket-price">Итого: <span class="price">{{totalPrice}}</span></h4>
         <form action="/orders" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
             <button type="submit" class="btn">Сделать заказ</button>
         </form>
     </div>

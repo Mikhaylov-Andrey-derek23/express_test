@@ -2,6 +2,7 @@ const {Router} = require('express');
 const Courses = require('../models/courses');
 const Basket = require ('../models/basket');
 const User = require('../models/user');
+const auth = require('../midleware/auth');
 
 function getAllPrice(course){
     return course.reduce((total, course)=>{
@@ -11,7 +12,7 @@ function getAllPrice(course){
 
 const router = Router();
 
-router.get('/', async (req, res)=>{
+router.get('/', auth, async (req, res)=>{
     const user = await req.user.populate('basket.items.courseID').execPopulate();
     res.render('basket', {
         title : 'Корзина',
@@ -21,13 +22,13 @@ router.get('/', async (req, res)=>{
     })
 })
 
-router.post('/add', async(req, res)=>{
+router.post('/add', auth, async(req, res)=>{
     const course = await Courses.findById(req.body.id);
     req.user.addToBasket(course);
     res.redirect('/basket');
 })
 
-router.delete('/remove/:id', async(req, res)=>{
+router.delete('/remove/:id', auth, async(req, res)=>{
     req.user.removeBasketCourse(req.params.id); 
     const user = await req.user.populate('basket.items.courseID').execPopulate();
     const basket = {course : user.basket.items, price : getAllPrice(user.basket.items)}

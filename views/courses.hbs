@@ -14,11 +14,16 @@
                     </div>
                     <div class="card-action action">
                         <a href="/courses/{{_id}}" target="__blanck">Открыть курс</a>
-                        <a href="/courses/{{_id}}/edit?allow=true ">Редактировать курс</a> 
+                        {{#if @root.isAuth}}
+                        {{#if @root.isUserAdmin}}
+                            <a href="/courses/{{_id}}/edit?allow=true ">Редактировать курс</a>
+                        {{/if}} 
                         <form action="basket/add" method="POST">
+                            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
                             <input type="hidden" name="id" value="{{_id}}">
                             <button type="submit" class="btn btn-primary">Купить</button>
                         </form>
+                        {{/if}}
                     </div>
                 </div>
             </div>
