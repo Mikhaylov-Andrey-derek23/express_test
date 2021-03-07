@@ -15,11 +15,14 @@
         {{/if}}
 
         {{#if isAuth}}
-          {{#if isAdd}}
-            <li class="active"><a href="/add">Добавить курс</a></li>
-          {{else}}
-            <li><a href="/add">Добавить курс</a>
+          {{#if isUserAdmin}}
+            {{#if isAdd}}
+              <li class="active"><a href="/add">Добавить курс</a></li>
+            {{else}}
+              <li><a href="/add">Добавить курс</a>
+            {{/if}}
           {{/if}}
+
           {{#if isBasket}}
             <li class="active"><a href="/basket">Корзина</a></li>
           {{else}}
