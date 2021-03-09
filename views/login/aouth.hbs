@@ -9,7 +9,7 @@
     <div id="login" class="col s6 offset-s3">
         <h1>Войти в магазин</h1>
         {{#if errorLogin}}
-            
+            <p class="loginError">{{errorLogin}}</p>
         {{/if}}
         <form action="/aouth/login" method="POST">
           <div class="input-field">

@@ -18,9 +18,10 @@ const ordersRouter = require('./routers/orders');
 const aouthRouter = require('./routers/aouth');
 const varbalse = require('./midleware/varibalse');
 const userMidleware = require('./midleware/user');
+const keys = require('./keys/');
 
 
-const MONGOBD_URL = 'mongodb+srv://derek:1234@cluster0.6ccds.mongodb.net/shop';
+
 
 const app = express();
 
@@ -36,7 +37,7 @@ app.set('views', 'views');
 
 const store = new MongoStore({
     collection : 'session',
-    uri : MONGOBD_URL 
+    uri : keys.MONGOBD_URL 
 })
 
 // app.use(async(req, res, next)=>{
@@ -54,7 +55,7 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use(session({
-    secret : "some secret value",
+    secret : keys.SESSION_SECRET,
     resave : false,
     saveUninitialized : false,
     store
@@ -75,7 +76,7 @@ const PORT = process.env.PORT || 3000;
 
 async function start(){
     try{
-        await mongoose.connect(MONGOBD_URL, {useNewUrlParser : true, useUnifiedTopology: true, useFindAndModify: false});
+        await mongoose.connect(keys.MONGOBD_URL, {useNewUrlParser : true, useUnifiedTopology: true, useFindAndModify: false});
         // const candidate = await User.findOne();
         // if(!candidate){
         //     const user = new User({
