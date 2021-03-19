@@ -1,0 +1,13 @@
+<h1>Востановить пароль</h1>
+{{#if errorLogin}}
+    <p class="loginError">{{errorLogin}}</p>
+{{/if}}
+<form action="/aouth/reset" method="POST">
+    <div class="input-field">
+        <input  type="email" id="email"  name="email" class="validate" required>
+        <label for="email">Укажите ваш email который указали при регистрации</label>
+        <span class="helper-text" data-error="Введите ваш email" data-success="Верно"></span>
+    </div>
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button class="btn btn-primary">Востановить пароль</button>
+</form>         

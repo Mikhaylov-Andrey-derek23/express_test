@@ -13,6 +13,12 @@ const users = new Schema({
     typeUser : {
         type : String,
         default : 'user'
+    },
+    resetToken : {
+        type: String
+    },
+    resetTokenDate : {
+        type: Date
     }, 
     dateRegister : {
         type : Date,
