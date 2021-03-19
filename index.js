@@ -19,6 +19,7 @@ const aouthRouter = require('./routers/aouth');
 const varbalse = require('./midleware/varibalse');
 const userMidleware = require('./midleware/user');
 const keys = require('./keys/');
+const error404 = require('./midleware/error404');
 
 
 
@@ -71,6 +72,8 @@ app.use('/add', addRouter);
 app.use('/basket', basketRouter);
 app.use('/orders', ordersRouter);
 app.use('/aouth', aouthRouter);
+
+app.use(error404);
 
 const PORT = process.env.PORT || 3000;
 
